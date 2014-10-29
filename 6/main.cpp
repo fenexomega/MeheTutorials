@@ -20,7 +20,7 @@ int LoadGLTextures()									// Load Bitmaps And Convert To Textures
 	/* load an image file directly as a new OpenGL texture */
 	texture[0] = SOIL_load_OGL_texture
 		(
-		"/home/jordy/Projects/Cpp/Opengl/Nehe/6/texture.bmp",
+		"texture.bmp",
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_INVERT_Y
@@ -142,5 +142,8 @@ int main(int argc,char** argv)
 	glutIdleFunc(DrawGLScene);
 
 	glutMainLoop();
+	
+	
+
 	return 0;
 }

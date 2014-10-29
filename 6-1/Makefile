@@ -1,5 +1,5 @@
 CC=clang++
-FLAGS= -Wall -g
+FLAGS= -Wall -g -std=c++11
 LIBS= -Llib -ISOIL -Wl,-Bstatic -lSOIL -Wl,-Bdynamic -lGL -lGLU -lglut 
 
 all:
