@@ -1,6 +1,6 @@
 CC=clang++
 LD_LIBS= -Llib -Wl,-Bstatic -lSOIL -Wl,-Bdynamic -lGL -lGLU -lglut
-FLAGS=-Wall
+FLAGS=-Wall -g 
 
 all:
 	$(CC) -c *.cpp $(FLAGS)
