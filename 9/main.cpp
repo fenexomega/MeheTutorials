@@ -1,12 +1,12 @@
-/*
+	/*
 
-Apertar o B para blending
-Apertar L para Luz
-Rotacionar com as setas!
+	Apertar o B para blending
+	Apertar L para Luz
+	Rotacionar com as setas!
 
 
 
-*/
+	*/
 #include <iostream>
 #include <GL/glut.h>
 #include "SOIL/SOIL.h"
@@ -14,71 +14,84 @@ Rotacionar com as setas!
 
 #define WINDOW_NAME "Nehe 9"
 
-using namespace std;
+	using namespace std;
 
-GLuint textures[3];
-float rotx = 0;
-float roty = 0;
-float rotz = 0;
+	GLuint textures[3];
+	float rotx = 0;
+	float roty = 0;
+	float rotz = 0;
 
-bool fullscreen;
-bool active;
-bool keys[256];
+	bool fullscreen;
+	bool active;
+	bool keys[256];
 
-bool twinkle = false;
-
-
-GLfloat LightAmbient[]  = { 0.5f, 0.5f,0.5f,0.5f};
-GLfloat LightDiffuse[]  = { 1.0f, 1.0f, 1.0f, 1.0f};
-GLfloat LightPosition[] = { 0.0f, 0.0f, 2.0f, 1.0f};
-
-// Número de estrelas!
-const uint NUM = 50;
-
-typedef struct
-{
-	int r,g,b;
-	float dist;
-	float angle;
-}Star;
-
-Star stars[NUM];
-
-//Variáveis das estrelas:
-float zoom = -15.0f;
-float tilt = 90.0f;
-float spin = 0;
-
-GLuint loop;
-GLuint texture[1];
+	bool twinkle = false;
 
 
-void DrawGL()
-{
-	spin = 0;
-	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-	glBindTexture(GL_TEXTURE_2D,texture[0]);
+	GLfloat LightAmbient[]  = { 0.5f, 0.5f,0.5f,0.5f};
+	GLfloat LightDiffuse[]  = { 1.0f, 1.0f, 1.0f, 1.0f};
+	GLfloat LightPosition[] = { 0.0f, 0.0f, 2.0f, 1.0f};
 
-	for(int loop = 0 ; loop < NUM ; ++loop)
+	// Número de estrelas!
+	const uint NUM = 50;
+
+	typedef struct
 	{
-		glLoadIdentity();
-		
-		glTranslatef(0.0f,0.0f,zoom);
-		
-		glRotatef(tilt,1.0f,0.0f,0.0f);
-		
-		glRotatef(stars[loop].angle,0.0f,1.0f,0.0f);
-		
-		glTranslatef(stars[loop].dist,0.0f,0.0f);
-		
-		
-		glRotatef(-stars[loop].angle,0.0f,1.0f,0.0f);
-	
-		glRotatef(-tilt,1.0f,0.0f,0.0f);
+		int r,g,b;
+		float dist;
+		float angle;
+	}Star;
 
-		if(twinkle)
+	Star stars[NUM];
+
+	//Variáveis das estrelas:
+	float zoom = -15.0f;
+	float tilt = 90.0f;
+	float spin = 0;
+
+	GLuint loop;
+	GLuint texture[1];
+
+
+	void DrawGL()
+	{
+		spin = 0;
+		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+		glBindTexture(GL_TEXTURE_2D,texture[0]);
+
+		for(int loop = 0 ; loop < NUM ; ++loop)
 		{
-			glColor4ub(stars[NUM - loop - 1].r,stars[NUM - loop - 1].g,stars[NUM - loop - 1].b,255);
+			glLoadIdentity();
+			
+			glTranslatef(0.0f,0.0f,zoom);
+			
+			glRotatef(tilt,1.0f,0.0f,0.0f);
+			
+			glRotatef(stars[loop].angle,0.0f,1.0f,0.0f);
+			
+			glTranslatef(stars[loop].dist,0.0f,0.0f);
+			
+			
+			glRotatef(-stars[loop].angle,0.0f,1.0f,0.0f);
+		
+			glRotatef(-tilt,1.0f,0.0f,0.0f);
+
+			if(twinkle)
+			{
+				glColor4ub(stars[NUM - loop - 1].r,stars[NUM - loop - 1].g,stars[NUM - loop - 1].b,255);
+				glBegin(GL_QUADS);
+					// Front Face
+					glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);
+					glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);
+					glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,  1.0f,  1.0f);
+					glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f,  1.0f);
+				glEnd();
+			}
+
+			glRotatef(spin,0.0f,0.0f,1.0f);
+
+			glColor4ub(stars[loop].r,stars[loop].g,stars[loop].b,255);
+
 			glBegin(GL_QUADS);
 				// Front Face
 				glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);
@@ -86,72 +99,49 @@ void DrawGL()
 				glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,  1.0f,  1.0f);
 				glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f,  1.0f);
 			glEnd();
+
+			stars[loop].angle += float(loop)/NUM;
+			stars[loop].dist  -= 0.01f;
+			spin += 0.01f;
+
+			if(stars[loop].dist < 0.0f)
+			{
+				stars[loop].dist += 5.0f;
+				stars[loop].r = rand( ) % 256;
+				/* Give It A New Green Value */
+				stars[loop].g = rand( ) % 256;
+				/* Give It A New Blue Value */
+				stars[loop].b = rand( ) % 256;
+			}
 		}
 
-		glRotatef(spin,0.0f,0.0f,1.0f);
+	/* Rotate The Star On The Z Axis */
 
-		glColor4ub(stars[loop].r,stars[loop].g,stars[loop].b,255);
 
-		glBegin(GL_QUADS);
-			// Front Face
-			glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);
-			glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);
-			glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,  1.0f,  1.0f);
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f,  1.0f);
-		glEnd();
+		glutSwapBuffers();
 
-		stars[loop].angle += float(loop)/NUM;
-		stars[loop].dist  -= 0.01f;
-		spin += 0.01f;
-
-		if(stars[loop].dist < 0.0f)
-		{
-			stars[loop].dist += 5.0f;
-			stars[loop].r = rand( ) % 256;
-		    /* Give It A New Green Value */
-		    stars[loop].g = rand( ) % 256;
-		    /* Give It A New Blue Value */
-		    stars[loop].b = rand( ) % 256;
-		}
 	}
 
-/* Rotate The Star On The Z Axis */
-
-
-	glutSwapBuffers();
-
-}
-
-bool LoadGLTextures()
-{
-	texture[0]  = SOIL_load_OGL_texture(
-			"Star.bmp",
-			SOIL_LOAD_AUTO,
-			SOIL_CREATE_NEW_ID,
-			SOIL_FLAG_INVERT_Y | SOIL_FLAG_MIPMAPS
-			);
-
-	cout << SOIL_last_result() << endl;
-
-
-	glBindTexture(GL_TEXTURE_2D,texture[0]);
-	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-
-	for( loop = 0; loop < NUM; ++loop)
+	bool LoadGLTextures(char * filename)
 	{
-		stars[loop].angle = 0.0f;
-		stars[loop].dist  = ((float) loop/ (float) NUM) * 5.0f;
-		stars[loop].r = rand()%256;
-		stars[loop].g = rand()%256;
-		stars[loop].b = rand()%256;
-	}
+		texture[0]  = SOIL_load_OGL_texture(
+				filename,
+				SOIL_LOAD_AUTO,
+				SOIL_CREATE_NEW_ID,
+				SOIL_FLAG_INVERT_Y | SOIL_FLAG_MIPMAPS
+				);
 
-	return true;
+		cout << SOIL_last_result() << endl;
+
+
+		glBindTexture(GL_TEXTURE_2D,texture[0]);
+		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+		return true;
 }
 void InitGL()
 {
-	LoadGLTextures();
+	LoadGLTextures("Star.bmp");
 	glEnable(GL_TEXTURE_2D);
 	glDepthFunc(GL_LEQUAL);
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
