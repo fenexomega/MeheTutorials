@@ -16,6 +16,7 @@
 
 #define WINDOW_NAME "Nehe 10"
 #define WORLD_FILE "WORLD.TXT"
+#define TEXTURE_FILE "tex2.png"
 
 using namespace std;
 
@@ -140,7 +141,7 @@ void DrawGL()
 	glRotatef(sceneroty, 0, 1.0f, 0.0);
 */
 
-	glRotatef(360.0f - player.roty,0,1.0f,0.0);
+	glRotatef(player.roty,0,1.0f,0.0);
 	glTranslatef(player.x,-0.22f,player.z);
 
 	int numtriangles = c.numtriangles;
@@ -212,13 +213,21 @@ bool LoadGLTextures(string filename)
 
 	cout << "HEIGHT = " << h  << endl;
 
-	GLubyte* pixels = (GLubyte *)  FreeImage_GetBits(image);
+	GLubyte* textura = new GLubyte[4*w*h];
+	char * pixels = (char *) FreeImage_GetBits(image);
 
+	for(int j = 0; j < w*h; ++j)
+	{
+		 textura[j*4+0]= pixels[j*4+2];
+		 textura[j*4+1]= pixels[j*4+1];
+	     textura[j*4+2]= pixels[j*4+0];
+		 textura[j*4+3]= pixels[j*4+3];
+	}
 
 	glBindTexture(GL_TEXTURE_2D,texture[0]);
 	//Também poderia setar aqui GL_BGR em vez de RGBA, mas isso é putaria.
 	//Talvez quebre alguma coisa do código no futuro. :P
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w,h,0,GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w,h,0,GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) textura);
 	
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
@@ -237,7 +246,7 @@ void InitGL()
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_LIGHT1);
-	LoadGLTextures("tex.bmp");
+	LoadGLTextures(TEXTURE_FILE);
 	/* Setup The Ambient Light */
 	glLightfv( GL_LIGHT1, GL_AMBIENT, LightAmbient );
 
@@ -266,18 +275,18 @@ void UpdateInput(unsigned char key, int x, int y)
 	switch(key)
 	{
 		case 'w':
-			player.x += sin(player.roty*PI/180) * vel;
-			player.z += cos(player.roty*PI/180) * vel;
+			player.x += sin(-player.roty*PI/180) * vel;
+			player.z += cos(-player.roty*PI/180) * vel;
 			break;
 		case 's':
-			player.x -= sin(player.roty*PI/180) * vel;
-			player.z -= cos(player.roty*PI/180) * vel;
+			player.x -= sin(-player.roty*PI/180) * vel;
+			player.z -= cos(-player.roty*PI/180) * vel;
 			break;
 		case 'd':
-			player.roty -= 3.0f;
+			player.roty += 3.0f;
 			break;
 		case 'a':
-			player.roty += 3.0f;
+			player.roty -= 3.0f;
 			break;
 		case 't':
 			break;
