@@ -9,17 +9,9 @@
 	*/
 #include <iostream>
 #include <GL/glut.h>
-#include <unistd.h>
 #include <FreeImage.h>
-#include <cstdio>
 
 #define WINDOW_NAME "Nehe 9"
-
-#ifdef __MINGW32__
-	#define SLASH "\\"
-#else
-	#define SLASH "/"
-#endif
 
 using namespace std;
 
@@ -85,12 +77,9 @@ void DrawGL()
 		if(twinkle)
 		{
 			glColor4ub(stars[NUM - loop - 1].r,stars[NUM - loop - 1].g,stars[NUM - loop - 1].b,255);
-			glBegin(GL_QUADS);
+			glBegin(GL_POINTS);
 				// Front Face
-				glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);
-				glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);
-				glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,  1.0f,  1.0f);
-				glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f,  1.0f);
+				glVertex3f(0.0f,0.0f,0.0f);
 			glEnd();
 		}
 
@@ -98,12 +87,9 @@ void DrawGL()
 
 		glColor4ub(stars[loop].r,stars[loop].g,stars[loop].b,255);
 
-		glBegin(GL_QUADS);
+		glBegin(GL_POINTS);
 			// Front Face
-			glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);
-			glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);
-			glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,  1.0f,  1.0f);
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f,  1.0f);
+			glVertex3f(0.0f,0.0f,0.0f);
 		glEnd();
 
 		stars[loop].angle += float(loop)/NUM;
@@ -175,15 +161,15 @@ bool LoadGLTextures(string filename)
 }
 void InitGL()
 {
-	LoadGLTextures("Star.bmp");
+//	LoadGLTextures("Star.bmp");
 	glEnable(GL_TEXTURE_2D);
 	glDepthFunc(GL_LEQUAL);
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 	glShadeModel(GL_SMOOTH);
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 	glEnable(GL_BLEND);
-
-
+	glPointSize(29.0f);
+	glEnable(GL_POINT_SMOOTH);
 	for(loop  = 0 ; loop < NUM ; ++loop)
 	{
 		stars[loop].angle=0.0f;
