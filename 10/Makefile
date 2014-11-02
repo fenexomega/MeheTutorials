@@ -1,9 +1,14 @@
 MXE=i686-pc-mingw32-
-CXX=clang++
-LD=$(MXE)ld
+CXX=g++
 LD_LIBS= -Llib -Bdynamic -lGL -lGLU -lglut -lfreeimage
 MXE_LD_LIBS=`i686-pc-mingw32-pkg-config glut freeimage --libs --cflags`
 FLAGS=-Wall  
+
+
+test: all run
+
+run:
+	./main
 
 all:
 ifeq ($(CROSS),TRUE)
