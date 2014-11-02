@@ -1,7 +1,7 @@
 MXE=i686-pc-mingw32-
 CXX=clang++
 LD=$(MXE)ld
-LD_LIBS= -Llib -Bdynamic -lGL -lGLU -lglut -lfreeimage
+LD_LIBS= -Bdynamic -lGL -lGLU -lglut -lfreeimage
 MXE_LD_LIBS=`i686-pc-mingw32-pkg-config glut freeimage --libs --cflags`
 FLAGS=-Wall  
 

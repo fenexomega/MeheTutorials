@@ -10,6 +10,7 @@
 #include <iostream>
 #include <GL/glut.h>
 #include <FreeImage.h>
+#include<FreeImagePlus.h>
 
 #define WINDOW_NAME "Nehe 9"
 

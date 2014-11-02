@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/movingInAWorld.dir/src/Cube.cpp.o CMakeFiles/movingInAWorld.dir/src/main.cpp.o  -o movingInAWorld -rdynamic -lglut -lXmu -lXi -lfreeimage -lGLU -lGL -lSM -lICE -lX11 -lXext 

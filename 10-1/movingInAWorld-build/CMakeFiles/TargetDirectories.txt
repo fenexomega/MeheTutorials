@@ -1,0 +1,1 @@
+/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/CMakeFiles/movingInAWorld.dir

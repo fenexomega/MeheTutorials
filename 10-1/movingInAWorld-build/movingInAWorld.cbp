@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+   <FileVersion major="1" minor="6" />
+   <Project>
+      <Option title="movingInAWorld" />
+      <Option makefile_is_custom="1" />
+      <Option compiler="gcc" />
+      <Option virtualFolders="CMake Files\;" />
+      <Build>
+      <Target title="all">
+         <Option working_dir="/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="edit_cache">
+         <Option working_dir="/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 edit_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="movingInAWorld">
+         <Option output="/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/movingInAWorld" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/usr/include" />
+            <Add directory="/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1" />
+            <Add directory="/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/backward" />
+            <Add directory="/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/x86_64-unknown-linux-gnu" />
+            <Add directory="/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include" />
+            <Add directory="/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 movingInAWorld" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="movingInAWorld/fast">
+         <Option output="/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/movingInAWorld" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/usr/include" />
+            <Add directory="/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1" />
+            <Add directory="/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/backward" />
+            <Add directory="/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/x86_64-unknown-linux-gnu" />
+            <Add directory="/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include" />
+            <Add directory="/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 movingInAWorld/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="rebuild_cache">
+         <Option working_dir="/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 rebuild_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      </Build>
+      <Unit filename="/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld/src/Cube.cpp">
+      </Unit>
+      <Unit filename="/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld/src/main.cpp">
+      </Unit>
+      <Unit filename="/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld/src/Cube.h">
+      </Unit>
+      <Unit filename="/home/jordy/Projetos/Cpp/opengl/MeheTutorials/10-1/movingInAWorld/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+   </Project>
+</CodeBlocks_project_file>
