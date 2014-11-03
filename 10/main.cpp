@@ -16,7 +16,7 @@
 
 #define WINDOW_NAME "Nehe 10"
 #define WORLD_FILE "WORLD.TXT"
-#define TEXTURE_FILE "tex2.png"
+#define TEXTURE_FILE "tex.bmp"
 
 using namespace std;
 
@@ -25,15 +25,17 @@ float posy = 0;
 float posz = 0;
 
 float walkbiasangle = 0;
-float walkbias = 0;
+int walkbias = 0;
 
 bool fullscreen;
 float vel = 0.1f;
 const GLfloat PI = 3.1416f;
+const GLfloat RAD = PI/180;
 
 GLfloat LightAmbient[]  = { 0.5f, 0.5f,0.5f,0.5f};
 GLfloat LightDiffuse[]  = { 1.0f, 1.0f, 1.0f, 1.0f};
 GLfloat LightPosition[] = { 0.0f, 0.0f, 2.0f, 1.0f};
+GLfloat headheight = 0.30f;
 
 GLuint loop;
 GLuint texture[1];
@@ -63,7 +65,7 @@ typedef struct
 }PLAYER;
 
 PLAYER player = {
-	0,1,0,0,0
+	0,-headheight,0,0,0
 };
 
 SECTOR c;
@@ -142,7 +144,7 @@ void DrawGL()
 */
 
 	glRotatef(player.roty,0,1.0f,0.0);
-	glTranslatef(player.x,-0.22f,player.z);
+	glTranslatef(player.x,player.y,player.z);
 
 	int numtriangles = c.numtriangles;
 
@@ -247,6 +249,8 @@ void InitGL()
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_LIGHT1);
 	LoadGLTextures(TEXTURE_FILE);
+	walkbias = 0;
+
 	/* Setup The Ambient Light */
 	glLightfv( GL_LIGHT1, GL_AMBIENT, LightAmbient );
 
@@ -277,6 +281,8 @@ void UpdateInput(unsigned char key, int x, int y)
 		case 'w':
 			player.x += sin(-player.roty*PI/180) * vel;
 			player.z += cos(-player.roty*PI/180) * vel;
+			player.y  = -0.05f*sin(walkbias) - headheight;
+			walkbias += 180/PI;
 			break;
 		case 's':
 			player.x -= sin(-player.roty*PI/180) * vel;
