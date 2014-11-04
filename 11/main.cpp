@@ -6,11 +6,12 @@
 #define TITULO "Nehe 11"
 #define XRES 1024
 #define YRES 768
-#define TEXTURE_FILE "tex.bmp"
+#define TEXTURE_FILE "bandeira-do-brasil.jpg"
 #define PI 3.141592654f
 #define TORAD( x )  ( x ) *PI/180.0f
 
 GLfloat rotx = 0;
+GLfloat roty = 0;
 
 GLuint texture[1];
 typedef struct
@@ -31,10 +32,10 @@ void DrawGL()
 
 	glTranslatef(0.0f,0.0f,-20.0f);
 
-	glRotatef(180.0f, 1.0f,0.0f,0.0f);
+	glRotatef(rotx, 1.0f,0.0f,0.0f);
+	glRotatef(roty, 0.0,1.0f,0.0f);
 
-	GLfloat x_m, y_m, z_m;
-	rotx++;
+	GLfloat x_m, y_m, z_m, u_m, v_m;
 
 	glBegin(GL_QUADS);
 	{
@@ -45,21 +46,33 @@ void DrawGL()
 					x_m = points[x][y].x;
 					y_m = points[x][y].y;
 					z_m = points[x][y].z;
+					u_m = (float) x/44.0f;
+					v_m = (float)y/44.0f;
+					glTexCoord2f(u_m,v_m);
 					glVertex3f(x_m,y_m,z_m);	
 					
 					x_m = points[x][y+1].x;
 					y_m = points[x][y+1].y;
 					z_m = points[x][y+1].z;
+					u_m = (float)x/44.0f;
+					v_m = (float)(y+1)/44.0f;
+					glTexCoord2f(u_m,v_m);
 					glVertex3f(x_m,y_m,z_m);	
 					
 					x_m = points[x+1][y+1].x;
 					y_m = points[x+1][y+1].y;
 					z_m = points[x+1][y+1].z;
+					u_m = (float)(x+1)/44.0f;
+					v_m = (float)(y+1)/44.0f;
+					glTexCoord2f(u_m,v_m);
 					glVertex3f(x_m,y_m,z_m);	
 					
 					x_m = points[x+1][y].x;
 					y_m = points[x+1][y].y;
 					z_m = points[x+1][y].z;
+					u_m = (float)(x+1)/44.0f;
+					v_m = (float)y/44.0f;
+					glTexCoord2f(u_m,v_m);
 					glVertex3f(x_m,y_m,z_m);	
 			}
 				
@@ -173,6 +186,25 @@ void initGL()
 	}
 }
 
+void KeyboardGL(int key, int x, int y)
+{
+	switch(key)
+	{
+		case GLUT_KEY_UP:
+			rotx -= 3.0f;
+			break;
+		case GLUT_KEY_DOWN:
+			rotx += 3.0f;
+			break;
+		case GLUT_KEY_RIGHT:
+			roty -= 3.0f;
+			break;
+		case GLUT_KEY_LEFT:
+			roty += 3.0f;
+			break;
+	}
+}
+
 int main(int argc, char** argv)
 {
 	glutInit(&argc,argv);
@@ -185,6 +217,7 @@ int main(int argc, char** argv)
 	glutDisplayFunc(DrawGL);
 	glutIdleFunc(DrawGL);
 	glutReshapeFunc(ReshapeGL);
+	glutSpecialFunc(KeyboardGL);
 
 	glutMainLoop();
  	return 0;
