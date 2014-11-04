@@ -4,7 +4,7 @@ FLAGS=-Wall -g
 
 all:
 	$(CC) -c *.cpp $(FLAGS)
-	$(CC) *.o -o main $(LD_LIBS)
+	$(CC) *.o -o main.out $(LD_LIBS)
 
 clean:
 	rm *.o main
