@@ -1,11 +1,16 @@
 #include <iostream>
 #include <GL/freeglut.h>
 #include <FreeImage.h>
+#include <cmath>
 
 #define TITULO "Nehe 11"
 #define XRES 1024
 #define YRES 768
 #define TEXTURE_FILE "tex.bmp"
+#define PI 3.141592654f
+#define TORAD( x )  ( x ) *PI/180.0f
+
+GLfloat rotx = 0;
 
 GLuint texture[1];
 typedef struct
@@ -15,6 +20,8 @@ typedef struct
 
 using namespace std;
 
+POINT points[45][45]; 
+
 void DrawGL()
 {
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
@@ -22,18 +29,57 @@ void DrawGL()
 	
 	glBindTexture(GL_TEXTURE_2D,texture[0]);
 
-	glTranslatef(0.0f,0.0f,-3.0f);
-	
+	glTranslatef(0.0f,0.0f,-20.0f);
 
-	
+	glRotatef(180.0f, 1.0f,0.0f,0.0f);
+
+	GLfloat x_m, y_m, z_m;
+	rotx++;
+
 	glBegin(GL_QUADS);
 	{
-		glTexCoord2f(0.0f,1.0f); glVertex3f(-1.0f, 1.0f ,0.0f );
-		glTexCoord2f(0.0f,0.0f); glVertex3f(-1.0f,-1.0f ,0.0f );
-		glTexCoord2f(1.0f,0.0f); glVertex3f( 1.0f,-1.0f ,0.0f );
-		glTexCoord2f(1.0f,1.0f); glVertex3f( 1.0f, 1.0f ,0.0f );
+		for(int x = 0; x < 44; ++x)
+		{
+			for(int y = 0; y < 44; y++)
+			{
+					x_m = points[x][y].x;
+					y_m = points[x][y].y;
+					z_m = points[x][y].z;
+					glVertex3f(x_m,y_m,z_m);	
+					
+					x_m = points[x][y+1].x;
+					y_m = points[x][y+1].y;
+					z_m = points[x][y+1].z;
+					glVertex3f(x_m,y_m,z_m);	
+					
+					x_m = points[x+1][y+1].x;
+					y_m = points[x+1][y+1].y;
+					z_m = points[x+1][y+1].z;
+					glVertex3f(x_m,y_m,z_m);	
+					
+					x_m = points[x+1][y].x;
+					y_m = points[x+1][y].y;
+					z_m = points[x+1][y].z;
+					glVertex3f(x_m,y_m,z_m);	
+			}
+				
+		}
 	}
 	glEnd();
+
+	GLfloat hold;
+	for(int x = 0; x < 45; ++x)
+	{
+		hold = points[0][x].z;
+		for(int y = 0; y < 44; ++y)
+		{	
+			points[y][x].z = points[y+1][x].z;
+
+		}
+		points[44][x].z = hold;
+	}
+
+
 
 	glutSwapBuffers();
 }
@@ -51,7 +97,9 @@ void ReshapeGL(int w, int h)
 	glLoadIdentity();
 
 	gluPerspective(45.0f,ratio,0.1f,100.0f);
+
 	
+
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
@@ -102,6 +150,8 @@ unsigned int LoadImageAsTexture(string filename)
 
 void initGL()
 {
+	glPolygonMode(GL_BACK, GL_FILL);
+	glPolygonMode(GL_FRONT,GL_LINE);
 	glEnable(GL_TEXTURE_2D);
 	texture[0] = LoadImageAsTexture(TEXTURE_FILE);
 	if(texture[0] == 0)
@@ -111,6 +161,16 @@ void initGL()
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 	glClearDepth(1.0f);
+
+	for(int x = 0; x < 45; x++)
+	{
+		for(int y = 0; y < 45; y++)
+		{
+			points[x][y].x = (float) (x/5.0f) - 4.5f;
+			points[x][y].y = (float) (y/5.0f) - 4.5f;
+			points[x][y].z = (float) sin( TORAD((x/5.0f)*40.0f)) ;
+		}
+	}
 }
 
 int main(int argc, char** argv)
